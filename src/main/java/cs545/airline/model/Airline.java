@@ -3,6 +3,8 @@ package cs545.airline.model;
 import java.util.Collections;
 import java.util.List;
 
+import javax.faces.bean.RequestScoped;
+import javax.inject.Named;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,6 +13,8 @@ import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+@Named
+@RequestScoped
 @Entity
 @Table(uniqueConstraints=@UniqueConstraint(name="Airline_Name",columnNames={"name"}))
 public class Airline {
