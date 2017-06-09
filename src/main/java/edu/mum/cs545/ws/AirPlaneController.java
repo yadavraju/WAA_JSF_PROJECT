@@ -5,10 +5,15 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import cs545.airline.model.Airline;
 import cs545.airline.model.Airplane;
@@ -20,54 +25,60 @@ import cs545.airline.service.AirplaneService;
 public class AirPlaneController {
 	
 	@Inject
-	AirplaneService airplaneService;
+	AirplaneService airplaneeService;
 
-	// this is not working in database
-/*	@Path("create/{a}")
+	@Path("create")
 	@POST
-	public String createAirPlane(@PathParam("a") String b) {
-		System.out.println("--------" + b);
-		Airline airline = airplaneService.findByName(b);
-		if (airline != null) {
-			airlineService.delete(airline);
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response create(Airplane airplane) {
+		try {
+			airplaneeService.create(airplane);
+			return Response.ok(airplane).build();
+		} catch (Exception e) {
+			return Response.serverError().entity("Cannot create airplane.").build();
 		}
-		return "Sucees";
 	}
 
-	@Path("fineone/{name}")
-	@GET
-	public Airline getAirLinesById(@PathParam("name") String name) {
-		System.out.println("--------" + name);
-		Airline airline = airplaneService.findByName(name);
-		return airplaneService.find(airline);
+	@PUT
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("update")
+	public Response update(Airplane airplane) {
+		try {
+			airplaneeService.update(airplane);
+			return Response.ok(airplane).build();
+		} catch (Exception e) {
+			return Response.serverError().entity("Cannot update airplane.").build();
+		}
 	}
 
-	@Path("flight/{name}")
-	@GET
-	public List<Airline> getAirLineFlight(@PathParam("name") String name) {
-		System.out.println("--------" + name);
-		List<Airline> findByFlight = new ArrayList<>();
-		Airline airline = airplaneService.findByName(name);
-		List<Flight> lFlight = airline.getFlights();
-		for (Flight flight : lFlight) {
-			findByFlight.addAll(airplaneService.findByFlight(flight));
+	@PUT
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("delete")
+	public Response delete(Airplane airplane) {
+		try {
+			airplaneeService.delete(airplane);
+			return Response.ok(airplane).build();
+		} catch (Exception e) {
+			return Response.serverError().entity("Cannot delete airplane.").build();
 		}
-		return findByFlight;
+	}
 
-	}*/
 	
 	@Path("flight/model/{name}")
 	@GET
-	public List<Airplane> getAirPlaneByModel(@PathParam("model")String model) {
-		return airplaneService.findByModel(model);
+	public List<Airplane> getAirPlaneByModel(@PathParam("name")String model) {
+		return airplaneeService.findByModel(model);
 	}
 
 	@Path("list")
 	@GET
 	public List<Airplane> getAirlineListOfFlight() {
 		List<Airplane> result = new ArrayList<>();
-		if (airplaneService.findAll() != null) {
-			result = airplaneService.findAll();
+		if (airplaneeService.findAll() != null) {
+			result = airplaneeService.findAll();
 		}
 		return result;
 	}

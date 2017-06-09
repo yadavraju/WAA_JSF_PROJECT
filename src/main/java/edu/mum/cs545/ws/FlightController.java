@@ -1,6 +1,5 @@
 package edu.mum.cs545.ws;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -14,42 +13,43 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import cs545.airline.model.Airline;
+import cs545.airline.model.Airport;
 import cs545.airline.model.Flight;
-import cs545.airline.service.AirlineService;
+import cs545.airline.service.AirportService;
+import cs545.airline.service.FlightService;
 
-@Path("airline")
-public class AirlineController {
+@Path("flight")
+public class FlightController {
 
 	@Inject
-	private AirlineService airlineService;
+	private FlightService flightService;
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("{id}")
 	public Response find(@PathParam("id") int id) {
-		Airline airline = new Airline();
-		airline.setId(id);
-		airline = airlineService.find(airline);
+		Flight flight = new Flight();
+		flight.setId(id);
+		flight = flightService.find(flight);
 
-		if (airline == null) {
+		if (flight == null) {
 			return Response.status(Response.Status.NOT_FOUND)
-					.entity(String.format("Airline with id %d doesn't exist.", id)).build();
+					.entity(String.format("Flight with id %d doesn't exist.", id)).build();
 		}
 
-		return Response.ok(airline).build();
+		return Response.ok(flight).build();
 	}
 
 	@Path("create")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response create(Airline airline) {
+	public Response create(Flight airline) {
 		try {
-			airlineService.create(airline);
+			flightService.create(airline);
 			return Response.ok(airline).build();
 		} catch (Exception e) {
-			return Response.serverError().entity("Cannot create airline.").build();
+			return Response.serverError().entity("Cannot create Flight.").build();
 		}
 	}
 
@@ -57,12 +57,12 @@ public class AirlineController {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("update")
-	public Response update(Airline airline) {
+	public Response update(Flight airline) {
 		try {
-			airlineService.update(airline);
+			flightService.update(airline);
 			return Response.ok(airline).build();
 		} catch (Exception e) {
-			return Response.serverError().entity("Cannot update airline.").build();
+			return Response.serverError().entity("Cannot update Flight.").build();
 		}
 	}
 
@@ -70,9 +70,9 @@ public class AirlineController {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("delete")
-	public Response delete(Airline airline) {
+	public Response delete(Flight airline) {
 		try {
-			airlineService.delete(airline);
+			flightService.delete(airline);
 			return Response.ok(airline).build();
 		} catch (Exception e) {
 			return Response.serverError().entity("Cannot delete airline.").build();
@@ -81,22 +81,15 @@ public class AirlineController {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Airline> index() {
-		return airlineService.findAll();
+	public List<Flight> index() {
+		return flightService.findAll();
 	}
 
 	@Path("flight/{name}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Airline> getAirLineFlight(@PathParam("name") String name) {
-		System.out.println("--------" + name);
-		List<Airline> findByFlight = new ArrayList<>();
-		Airline airline = airlineService.findByName(name);
-		List<Flight> lFlight = airline.getFlights();
-		for (Flight flight : lFlight) {
-			findByFlight.addAll(airlineService.findByFlight(flight));
-		}
-		return findByFlight;
+	public List<Flight> getAirportbyFlight(@PathParam("name") String name) { 
+		return flightService.findByNumber(name);
 
 	}
 
