@@ -21,7 +21,7 @@ import cs545.airline.service.FlightService;
 @ViewScoped
 public class Allservice implements Serializable {
 	private static final long serialVersionUID = 1L;
-    // git hub problemnn
+    // git hub
 	@Inject
 	private FlightService flightService;
 	@Inject
