@@ -18,13 +18,14 @@
 	<br />
 
 	<h:form>
-		<h:outputLabel>Airline Name</h:outputLabel>
-		<h:inputText value="#{airline.name}"></h:inputText>
-
-		<h:commandButton action="airline/create" value="search">
-			<f:ajax render="table_id" execute="@form" event="click" />
+ 	    AirlineName:
+ 	    <h:inputText id="text_airlinename"
+			value="#{allservice.flightQuery.airlineName}">
+		</h:inputText>
+		<h:commandButton value="Create">
+			<f:ajax listener="#{allservice.createFromJSF()}" execute="@form"
+				render="table_id" />
 		</h:commandButton>
-
 	</h:form>
 
 
@@ -41,40 +42,13 @@
 
 			<h:column>
 				<h:form>
-					<h:commandButton action="#{airlineService.findAll()}"
-						value="View Flight"></h:commandButton>
+					<h:commandButton action="#" value="Update"></h:commandButton>
+					<h:commandButton action="#" value="Delete"></h:commandButton>
 				</h:form>
 			</h:column>
 
 		</h:dataTable>
 	</div>
 
-
-
-	<div style="float: left; padding-left: 200px">
-		<h:dataTable value="#{airlineService.findAll()}" var="o" id="abcd"
-			styleClass="order-table" headerClass="order-table-header"
-			rowClasses="order-table-odd-row,order-table-even-row">
-			<h:column>
-				<f:facet name="header">Id</f:facet>#{o.id}
-		</h:column>
-			<h:column>
-				<f:facet name="header">Name</f:facet>#{o.name}
-		</h:column>
-		</h:dataTable>
-	</div>
-
-	<h:form>
-		<h:outputLabel value="AirLine "></h:outputLabel>
-		<h:inputText value="#{account.accountnumber}"></h:inputText>
-		<br />
-		<br />
-		<h:outputLabel value="Amount: "></h:outputLabel>
-		<h:inputText value="#{accountEntry.amount}"></h:inputText>
-		<br />
-		<br />
-		<h:commandButton value="Deposit"
-			action="#{accountService.deposit(account.accountnumber,accountEntry.amount)}"></h:commandButton>
-	</h:form>
 </h:body>
 </html>

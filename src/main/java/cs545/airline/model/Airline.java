@@ -50,6 +50,8 @@ public class Airline {
 	}
 
 	public void setName(String name) {
+		//<f:ajax event="click" render="table_id" />
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"+name);
 		this.name = name;
 	}
 
