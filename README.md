@@ -1,4 +1,4 @@
-# WAA_JSF_PROJECT D
+# WAA_JSF_PROJECT DOCUMENTATION
 BaseUrl : http://localhost:8080/airlinesWebApp/rs/
 
 #AirLineService:
