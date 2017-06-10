@@ -18,6 +18,7 @@ import cs545.airline.model.Airport;
 import cs545.airline.model.Flight;
 import cs545.airline.service.AirportService;
 import cs545.airline.service.FlightService;
+import edu.mum.gf.workaround.Utills;
 
 @Path("flight")
 public class FlightController {
@@ -67,14 +68,14 @@ public class FlightController {
 		}
 	}
 
-	@DELETE
+	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("delete")
 	public Response delete(Flight airline) {
 		try {
 			flightService.delete(airline);
-			return Response.ok("Sucessfully deleted").build();
+			return Response.ok(Utills.sucessMesseesge()).build();
 		} catch (Exception e) {
 			return Response.serverError().entity("Cannot delete airline.").build();
 		}

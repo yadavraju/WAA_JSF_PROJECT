@@ -1,9 +1,14 @@
 package edu.mum.cs545.ws;
 
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
+import javax.json.JsonValue;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -18,6 +23,7 @@ import javax.ws.rs.core.Response;
 import cs545.airline.model.Airline;
 import cs545.airline.model.Flight;
 import cs545.airline.service.AirlineService;
+import edu.mum.gf.workaround.Utills;
 
 @Path("airline")
 public class AirlineController {
@@ -67,14 +73,14 @@ public class AirlineController {
 		}
 	}
 
-	@DELETE
+	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("delete")
 	public Response delete(Airline airline) {
 		try {
 			airlineService.delete(airline);
-			return Response.ok("Sucessfully deleted").build();
+			return Response.ok(Utills.sucessMesseesge()).build();
 		} catch (Exception e) {
 			return Response.serverError().entity("Cannot delete airline.").build();
 		}

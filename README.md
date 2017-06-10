@@ -26,10 +26,10 @@ BaseUrl : http://localhost:8080/airlinesWebApp/rs/
     Response :  {"id": 1251,"name": "Gita"}
     
 4 To Delete Airline
-    Method: DELETE
+    Method: POST
     URL : http://localhost:8080/airlinesWebApp/rs/airline/delete
     Parameter : {"id": 1251,"name": "Gita"}
-    Response :  Sucessfully deleted
+    Response :  { "status": "Sucess","message": "SucessFully deleted"}
 
 5 To get List of  by Airline name
     Method : GET
