@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<h:outputStylesheet library="css" name="table-style.css" />
+</h:head>
+<h:body>
+
+	<h:form>
+		<h:commandLink action="index?faces-redirect=true">
+			<h:outputText value="Home"></h:outputText>
+		</h:commandLink>
+	</h:form>
+	<br />
+
+	<h:form>
+ 	<h:outputText value="SEARCH BY:"></h:outputText>
+ 	airlineName:
+ 	<h:inputText id="airlineName_id"
+			value="#{allservice.flightQuery.airlineName}">
+		</h:inputText>
+ 	
+ 	originAirport:
+ 	<h:inputText id="originAirportCode_id"
+			value="#{allservice.flightQuery.originAirportCode}">
+		</h:inputText>
+ 	 destinationAirportCode:
+ 	<h:inputText id="destinationAirportCode_id"
+			value="#{allservice.flightQuery.destinationAirportCode}">
+		</h:inputText>
+
+		<h:commandButton value="search">
+			<f:ajax listener="#{allservice.SearchFlight()}" execute="@form"
+				render="list" />
+		</h:commandButton>
+
+	</h:form>
+	<h:dataTable value="#{allservice.listFlight}" var="o" id="list"
+		styleClass="order-table" headerClass="order-table-header"
+		rowClasses="order-table-odd-row,order-table-even-row">
+		<h:column>
+			<f:facet name="header">Flight Number</f:facet>#{o.flightnr}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Airline</f:facet>#{o.airline.name}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Aeparture DateTimes</f:facet>#{o.departureDate}&nbsp;&nbsp; #{o.departureTime}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Arrival DateTimes</f:facet>#{o.arrivalDate}&nbsp;&nbsp; #{o.arrivalTime}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Origin Airports</f:facet>(#{o.origin.airportcode})#{o.origin.name}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Destination Airports</f:facet>(#{o.destination.airportcode})#{o.destination.name}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Airplane Model</f:facet>#{o.airplane.model}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Airplane Capacity</f:facet>#{o.airplane.capacity}
+		</h:column>
+
+	</h:dataTable>
+
+
+</h:body>
+</html>

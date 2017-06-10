@@ -1,23 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:h="http://xmlns.jcp.org/jsf/html">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
 
 <h:head>
-	<title>Flight details</title>
+	<h:outputStylesheet library="css" name="table-style.css" />
 </h:head>
 <h:body>
-	<h:dataTable value="#{airlineService.findAll()}" var="f" border="2" cellspacing="1" cellpadding="1">
-		<h:column>
-			<f:facet name="header">ID</f:facet>
-		#{f.id}
+
+	<h:form>
+		<h:commandLink action="index?faces-redirect=true">
+			<h:outputText value="Home"></h:outputText>
+		</h:commandLink>
+	</h:form>
+	<br />
+
+	<h:form>
+		<h:outputLabel>Airline Name</h:outputLabel>
+		<h:inputText value="#{airline.name}"></h:inputText>
+
+		<h:commandButton action="airline/create" value = "search">
+			<f:ajax render="table_id" execute="@form" event="click" />
+		</h:commandButton>
+
+	</h:form>
+
+
+	<div style="float: left;">
+		<h:dataTable value="#{airlineService.findAll()}" var="o" id="table_id"
+			styleClass="order-table" headerClass="order-table-header"
+			rowClasses="order-table-odd-row,order-table-even-row">
+			<h:column>
+				<f:facet name="header">Id</f:facet>#{o.id}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Name</f:facet>#{o.name}
+			</h:column>
+
+			<h:column>
+				<h:form>
+					<h:commandButton action="#{airlineService.findAll()}"
+						value="View Flight"></h:commandButton>
+				</h:form>
+			</h:column>
+
+		</h:dataTable>
+	</div>
+
+
+
+	<div style="float: left; padding-left: 200px">
+		<h:dataTable value="#{airlineService.findAll()}" var="o" id="abcd"
+			styleClass="order-table" headerClass="order-table-header"
+			rowClasses="order-table-odd-row,order-table-even-row">
+			<h:column>
+				<f:facet name="header">Id</f:facet>#{o.id}
 		</h:column>
-		<h:column>
-			<f:facet name="header">Name</f:facet>
-		#{f.name}
+			<h:column>
+				<f:facet name="header">Name</f:facet>#{o.name}
 		</h:column>
-	</h:dataTable>
+		</h:dataTable>
+	</div>
 </h:body>
 </html>
