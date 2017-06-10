@@ -35,4 +35,8 @@ BaseUrl : http://localhost:8080/airlinesWebApp/rs/
     Method : GET
     URL : http://localhost:8080/airlinesWebApp/rs/airline/flight/oneworld
     Response : [{"id":10,"name":"oneworld"},{"id":10,"name":"oneworld"},{"id":10,"name":"oneworld"},{"id":10,"name":"oneworld"}]
- 
+    
+#AirPlaneService:
+#AirPortService:
+#FlightService:
+These all are similar to airport service
