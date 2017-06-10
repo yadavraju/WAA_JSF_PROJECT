@@ -21,7 +21,7 @@
 		<h:outputLabel>Airline Name</h:outputLabel>
 		<h:inputText value="#{airline.name}"></h:inputText>
 
-		<h:commandButton action="airline/create" value = "search">
+		<h:commandButton action="airline/create" value="search">
 			<f:ajax render="table_id" execute="@form" event="click" />
 		</h:commandButton>
 
@@ -63,5 +63,18 @@
 		</h:column>
 		</h:dataTable>
 	</div>
+
+	<h:form>
+		<h:outputLabel value="AirLine "></h:outputLabel>
+		<h:inputText value="#{account.accountnumber}"></h:inputText>
+		<br />
+		<br />
+		<h:outputLabel value="Amount: "></h:outputLabel>
+		<h:inputText value="#{accountEntry.amount}"></h:inputText>
+		<br />
+		<br />
+		<h:commandButton value="Deposit"
+			action="#{accountService.deposit(account.accountnumber,accountEntry.amount)}"></h:commandButton>
+	</h:form>
 </h:body>
 </html>

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -67,14 +68,14 @@ public class AirPortController {
 		}
 	}
 
-	@PUT
+	@DELETE
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("delete")
 	public Response delete(Airport airline) {
 		try {
 			airporteService.delete(airline);
-			return Response.ok(airline).build();
+			return Response.ok("Sucessfully deleted").build();
 		} catch (Exception e) {
 			return Response.serverError().entity("Cannot delete airline.").build();
 		}

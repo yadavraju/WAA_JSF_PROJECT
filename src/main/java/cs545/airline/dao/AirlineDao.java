@@ -6,7 +6,6 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 
 import cs545.airline.model.Airline;
 import edu.mum.gf.workaround.JpaUtil;
@@ -15,14 +14,15 @@ import edu.mum.gf.workaround.JpaUtil;
 @ApplicationScoped
 public class AirlineDao {
 
-//	@PersistenceContext(unitName = "cs545")
-//	private static EntityManager entityManager;
-//  Couldn't figure out another way to inject the persistence context
+	// @PersistenceContext(unitName = "cs545")
+	// private static EntityManager entityManager;
+	// Couldn't figure out another way to inject the persistence context
 	private EntityManager entityManager = JpaUtil.getEntityManager();
 
-
 	public void create(Airline airline) {
+		entityManager.getTransaction().begin();
 		entityManager.persist(airline);
+		entityManager.getTransaction().commit();
 	}
 
 	public Airline update(Airline airline) {
@@ -30,7 +30,12 @@ public class AirlineDao {
 	}
 
 	public void delete(Airline airline) {
-		entityManager.remove(airline);
+		Airline toremove = entityManager.find(Airline.class, airline.getId());
+		if (toremove != null) {
+			entityManager.getTransaction().begin();
+			entityManager.remove(toremove);
+			entityManager.getTransaction().commit();
+		}
 	}
 
 	public Airline findOne(long id) {
