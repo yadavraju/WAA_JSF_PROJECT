@@ -40,3 +40,5 @@ BaseUrl : http://localhost:8080/airlinesWebApp/rs/
 #AirPortService:
 #FlightService:
 These all are similar to airport service
+
+Screenshot for JSF portion : https://drive.google.com/drive/folders/0B30dqiiblMLwQ2RBSjhMMTV0OEU?usp=sharing
