@@ -101,6 +101,11 @@ public class Allservice implements Serializable {
 		airlineService.create(a);
 
 	}
+	
+	public void deleteFromJSF(Airline airline) {
+		airlineService.delete(airline);
+
+	}
 
 	public List<Flight> getListFlight() {
 		return listFlight;
