@@ -16,6 +16,7 @@ import cs545.airline.model.FlightQuery;
 import cs545.airline.service.AirlineService;
 import cs545.airline.service.AirportService;
 import cs545.airline.service.FlightService;
+import edu.mum.gf.workaround.Utills;
 
 @Named
 @ViewScoped
@@ -104,6 +105,13 @@ public class Allservice implements Serializable {
 	
 	public void deleteFromJSF(Airline airline) {
 		airlineService.delete(airline);
+
+	}
+	
+	public void updateFromJSF(Airline airline) {
+		String s = Utills.getRandomString()+"_AirLine";
+		airline.setName(s);
+		airlineService.update(airline);
 
 	}
 

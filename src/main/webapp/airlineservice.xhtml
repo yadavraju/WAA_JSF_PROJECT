@@ -34,15 +34,17 @@
 			styleClass="order-table" headerClass="order-table-header"
 			rowClasses="order-table-odd-row,order-table-even-row">
 			<h:column>
-				<f:facet name="header">Id</f:facet>#{o.id}
+				<f:facet name="header">Id</f:facet> #{o.id}
 			</h:column>
 			<h:column>
 				<f:facet name="header">Name</f:facet>#{o.name}
 			</h:column>
 
 			<h:column>
+				<f:facet name="header">Action</f:facet>
 				<h:form>
-					<h:commandButton action="#" value="Update"></h:commandButton>
+					<h:commandButton action="#{allservice.updateFromJSF(o)}"
+						value="Update"></h:commandButton>
 					<h:commandButton action="#{allservice.deleteFromJSF(o)}"
 						value="Delete"></h:commandButton>
 				</h:form>

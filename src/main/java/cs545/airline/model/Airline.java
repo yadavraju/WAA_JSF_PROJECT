@@ -27,6 +27,7 @@ public class Airline {
 	@OneToMany(mappedBy = "airline", cascade= CascadeType.ALL)
 	@OrderBy("departureDate, departureTime")
 	private List<Flight> flights = new ArrayList<>();
+	
 
 	/* Constructors */
 	public Airline() {
@@ -76,4 +77,7 @@ public class Airline {
 		}
 		return success;
 	}
+
+	
+	
 }
